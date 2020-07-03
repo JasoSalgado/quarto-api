@@ -15,6 +15,22 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 
 
+"""
+Session authentication
+"""
+# class SignUpView(APIView):
+#     authentication_classes = [SessionAuthentication, BasicAuthentication]
+#     permission_classes = [IsAuthenticated]
+
+#     def get(self, request, format='None'):
+#         content = {
+#             'email': unicode(request.email),
+#             'auth': unicode(request.auth),
+#         }
+#         return Response(content)
+
+
+
 
 # class UserViewSet(viewsets.GenericViewSet,
 #                   mixins.ListModelMixin,
@@ -29,7 +45,7 @@ To have access to the functions below, we just need the serializer_class and que
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    
+
 
 class UserGenericAPIView(generics.GenericAPIView,
                      mixins.ListModelMixin,
@@ -37,34 +53,34 @@ class UserGenericAPIView(generics.GenericAPIView,
                      mixins.UpdateModelMixin,
                      mixins.RetrieveModelMixin,
                      mixins.DestroyModelMixin):
-    
+
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    lookup_field = 'id'
+    # lookup_field = 'id'
     # authentication_classes = [SessionAuthentication, BasicAuthentication]
     user_authentication_classes = [TokenAuthentication]
     user_permission_classes = [IsAuthenticated]
-    
-    
-    def get(self, request, id=None):
-        
-        if id:
-            return self.retrieve(request)
-        else:
-            return self.list(request)
-        return self.list(request)
-    
-    
-    def post(self, request):
-        return self.create(request)
-    
-    
-    def put(self, request, id=None):
-        return self.update(request, id)
-    
-    
-    def delete(self, request):
-        return self.destroy(request, id)
+
+
+    # def get(self, request, id=None):
+
+    #     if id:
+    #         return self.retrieve(request)
+    #     else:
+    #         return self.list(request)
+    #     return self.list(request)
+
+
+    # def post(self, request):
+    #     return self.create(request)
+
+
+    # def put(self, request, id=None):
+    #     return self.update(request, id)
+
+
+    # def delete(self, request):
+    #     return self.destroy(request, id)
 
 
 
@@ -76,11 +92,11 @@ class UserAPIView(APIView):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
-    
-    
+
+
     def post(self, request):
         serializer = UserSerializer(data=request.data)
-        
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -92,17 +108,17 @@ class UserDetail(APIView):
     def get_object(self, id):
         try:
             return User.objects.get(id=id)
-        
+
         except User.DoesNotExist:
             return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    
-    
+
+
     def get(self, request, id):
         user = self.get_object(id)
         serializer = UserSerializer(user)
         return Response(serializer.data)
-    
-    
+
+
     def put(self, request, id):
         user = self.get_object(id)
         serializer = UserSerializer(user, data=request.data)
@@ -110,8 +126,8 @@ class UserDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    
+
+
     def delete(self, request, id):
         user = self.get_object(id)
         user.delete()
@@ -124,15 +140,15 @@ Using decorators @api_view and show data
 """
 @api_view(['GET', 'POST'])
 def user_list(request):
-    
+
     if request.method == 'GET':
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
-    
+
     elif request.method == 'POST':
         serializer = UserSerializer(data=request.data)
-        
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -143,7 +159,7 @@ def user_list(request):
 def user_detail(request, pk):
     try:
         user = User.objects.get(pk=pk)
-        
+
     except User.DoesNotExist:
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
@@ -151,16 +167,16 @@ def user_detail(request, pk):
     if request.method == 'GET':
         serializer = UserSerializer(user)
         return Response(serializer.data)
-    
-    
+
+
     elif request.method == 'PUT':
         serializer = UserSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    
+
+
     elif request.method == 'DELETE':
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -171,11 +187,10 @@ def user_detail(request, pk):
 Room list and details
 """
 
-
 class RoomViewSet(viewsets.ModelViewSet):
     serializer_class = RoomSerializer
     queryset = Room.objects.all()
-    
+
 
 class RoomGenericAPIView(generics.GenericAPIView,
                      mixins.ListModelMixin,
@@ -183,34 +198,34 @@ class RoomGenericAPIView(generics.GenericAPIView,
                      mixins.UpdateModelMixin,
                      mixins.RetrieveModelMixin,
                      mixins.DestroyModelMixin):
-    
+
     serializer_class = RoomSerializer
     queryset = Room.objects.all()
-    lookup_field = 'id'
+    # lookup_field = 'id'
     # authentication_classes = [SessionAuthentication, BasicAuthentication]
     room_authentication_classes = [TokenAuthentication]
     room_permission_classes = [IsAuthenticated]
-    
-    
-    def get(self, request, id=None):
-        
-        if id:
-            return self.retrieve(request)
-        else:
-            return self.list(request)
-        return self.list(request)
-    
-    
-    def post(self, request):
-        return self.create(request)
-    
-    
-    def put(self, request, id=None):
-        return self.update(request, id)
-    
-    
-    def delete(self, request):
-        return self.destroy(request, id)
+
+
+    # def get(self, request, id=None):
+
+    #     if id:
+    #         return self.retrieve(request)
+    #     else:
+    #         return self.list(request)
+    #     return self.list(request)
+
+
+    # def post(self, request):
+    #     return self.create(request)
+
+
+    # def put(self, request, id=None):
+    #     return self.update(request, id)
+
+
+    # def delete(self, request):
+    #     return self.destroy(request, id)
 
 
 
@@ -222,11 +237,11 @@ class RoomAPIView(APIView):
         rooms = Room.objects.all()
         serializer = RoomSerializer(rooms, many=True)
         return Response(serializer.data)
-    
-    
+
+
     def post(self, request):
         serializer = RoomSerializer(data=request.data)
-        
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -238,17 +253,17 @@ class RoomDetail(APIView):
     def get_object(self, id):
         try:
             return Room.objects.get(id=id)
-        
+
         except Room.DoesNotExist:
             return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-    
-    
+
+
     def get(self, request, id):
         room = self.get_object(id)
         serializer = RoomSerializer(room)
         return Response(serializer.data)
-    
-    
+
+
     def put(self, request, id):
         room = self.get_object(id)
         serializer = RoomSerializer(room, data=request.data)
@@ -256,8 +271,8 @@ class RoomDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    
+
+
     def delete(self, request, id):
         room = self.get_object(id)
         room.delete()
@@ -270,15 +285,15 @@ Using decorators @api_view and show data
 """
 @api_view(['GET', 'POST'])
 def room_list(request):
-    
+
     if request.method == 'GET':
         rooms = Room.objects.all()
         serializer = RoomSerializer(rooms, many=True)
         return Response(serializer.data)
-    
+
     elif request.method == 'POST':
         serializer = RoomSerializer(data=request.data)
-        
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

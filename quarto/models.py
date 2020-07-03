@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class User(models.Model):
     id = models.AutoField(primary_key = True)
     name= models.CharField(max_length=100, blank=False, default='Jhon')
@@ -55,3 +56,4 @@ class Room(models.Model):
             _id_user = self.id_user,
             _available = self.available,
         )
+
