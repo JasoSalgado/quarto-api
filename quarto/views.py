@@ -15,20 +15,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 
 
-"""
-Session authentication
-"""
-# class SignUpView(APIView):
-#     authentication_classes = [SessionAuthentication, BasicAuthentication]
-#     permission_classes = [IsAuthenticated]
-
-#     def get(self, request, format='None'):
-#         content = {
-#             'email': unicode(request.email),
-#             'auth': unicode(request.auth),
-#         }
-#         return Response(content)
-
 
 """
 To have access to the functions below, we just need the serializer_class and queryset
