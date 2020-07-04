@@ -30,15 +30,6 @@ Session authentication
 #         return Response(content)
 
 
-
-
-# class UserViewSet(viewsets.GenericViewSet,
-#                   mixins.ListModelMixin,
-#                   mixins.CreateModelMixin,
-#                   mixins.UpdateModelMixin,
-#                   mixins.RetrieveModelMixin,
-#                   mixins.DestroyModelMixin):
-
 """
 To have access to the functions below, we just need the serializer_class and queryset
 """

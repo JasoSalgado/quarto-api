@@ -26,14 +26,6 @@ urlpatterns = [
     path('generic/user/<int:id>/', UserGenericAPIView.as_view()),
     path('generic/room/<int:id>/', RoomGenericAPIView.as_view()),
     
-    # path('user_detail/<int:pk>/', user_detail),
-
-    # Room urls
-    
-    # RoomDetail shows room details
-    
-    # RoomGenericAPIViews allows to create another room
-    
 ]
 
 

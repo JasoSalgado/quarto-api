@@ -54,9 +54,24 @@ INSTALLED_APPS = [
     'quarto',
 ]
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 2
+    'PAGE_SIZE': 5,
+    
+    'DEFAULT_PERMISSION_CLASSES' : (
+        'rest_framework.permissions.IsAuthenticated',),
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',)
 }
+
+
+# AUTHENTICATION_BACKENDS = (
+#     'quarto.core.backends.CaseInsensitiveModelBackend', 
+#     )
 
 
 MIDDLEWARE = [
@@ -120,6 +135,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -138,3 +155,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
