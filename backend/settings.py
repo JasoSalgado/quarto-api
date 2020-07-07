@@ -59,6 +59,7 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+<<<<<<< HEAD
     'PAGE_SIZE': 5,
 
     # 'DEFAULT_PERMISSION_CLASSES' : (
@@ -68,6 +69,15 @@ REST_FRAMEWORK = {
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
         # 'rest_framework.authentication.TokenAuthentication',
         'knox.auth.TokenAuthentication',)
+=======
+    'PAGE_SIZE': 3,
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+>>>>>>> master
 }
 
 
@@ -80,7 +90,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware', 'quarto.middleware.AuthenticationMiddlewareJWT',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
