@@ -8,6 +8,7 @@ router.register('user', UserViewSet, basename = 'user')
 router.register('room', RoomViewSet, basename = 'room')
 
 urlpatterns = [
+    
     # viewset url
     path('viewset/', include(router.urls)),
 

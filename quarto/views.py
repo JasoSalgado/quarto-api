@@ -8,6 +8,7 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework import viewsets
 
 
+
 """
 To have access to the functions below, we just need the serializer_class and queryset
 """

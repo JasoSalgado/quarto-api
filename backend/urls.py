@@ -10,5 +10,5 @@ urlpatterns = [
     path('', include('quarto.urls')),
 
     path('api/token/', TokenObtainPairView.as_view()),
-    path('api/token/refresh/', TokenRefreshView.as_view())
+    path('api/token/refresh/', TokenRefreshView.as_view()),
 ]
