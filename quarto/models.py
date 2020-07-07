@@ -57,3 +57,6 @@ class Room(models.Model):
             _available = self.available,
         )
 
+
+
+
