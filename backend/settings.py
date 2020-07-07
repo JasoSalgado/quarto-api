@@ -52,14 +52,24 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'quarto',
+    'corsheaders',
+    'knox',
+    'registration',
 ]
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ],
-    
+
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+<<<<<<< HEAD
+    'PAGE_SIZE': 5,
+
+    # 'DEFAULT_PERMISSION_CLASSES' : (
+    #     'rest_framework.permissions.IsAuthenticated',),
+
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        'knox.auth.TokenAuthentication',)
+=======
     'PAGE_SIZE': 3,
     
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -67,6 +77,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+>>>>>>> master
 }
 
 
@@ -74,12 +85,16 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware', 'quarto.middleware.AuthenticationMiddlewareJWT',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'backend.urls'
 
