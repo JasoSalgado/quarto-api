@@ -1,5 +1,5 @@
 from knox import views as knox_views
-from .views import RegisterAPI, LoginAPI, ChangePasswordView, LogouAPI
+from .views import RegisterAPI, LoginAPI, ChangePasswordView
 from django.urls import path
 
 urlpatterns = [
