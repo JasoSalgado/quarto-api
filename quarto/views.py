@@ -129,3 +129,4 @@ class RoomDetail(APIView):
         room = self.get_object(id)
         room.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
